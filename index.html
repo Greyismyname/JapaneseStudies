@@ -11,6 +11,26 @@
             box-sizing: border-box;
         }
 
+        /* Hide scrollbar for all elements */
+        * {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        *::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        html {
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
         body {
             font-family: 'Courier New', monospace;
             background: #000 url('https://i1.wp.com/www.streethunters.net/wp-content/uploads/2017/01/Daido-Moriyama-%E2%80%98Record%E2%80%99-ebook-from-Plexus-1.jpg') center/cover fixed;
