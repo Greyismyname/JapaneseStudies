@@ -344,10 +344,21 @@
                 const url = link.href;
                 window.open(url, '_blank');
                 
-                // For web apps: redirect current window to blank page
-                // This effectively "closes" the app without actually closing the window
+                // Try multiple methods to close/hide the window for Linux web apps
                 setTimeout(() => {
-                    window.location.href = 'about:blank';
+                    // Method 1: Try Chrome app API
+                    if (typeof chrome !== 'undefined' && chrome.app && chrome.app.window) {
+                        chrome.app.window.current().close();
+                    }
+                    // Method 2: Try standard window.close()
+                    else if (window.close()) {
+                        window.close();
+                    }
+                    // Method 3: Minimize by going to a minimal page
+                    else {
+                        // Replace entire page with minimal content
+                        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;font-family:monospace;">Press Alt+F4 or close this window</div>';
+                    }
                 }, 100);
                 
                 e.preventDefault();
