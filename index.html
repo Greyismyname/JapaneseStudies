@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Study Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000 url('Daido-Moriyama-_Record_-ebook-from-Plexus-1.webp') center/cover fixed;
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            background: #000;
+            border: 3px solid #fff;
+            padding: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: #000;
+            border: 2px solid #fff;
+            padding: 15px 25px;
+        }
+
+        .stat-box .number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-box .label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #fff;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .category h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .resource-card {
+            background: #1a1a1a;
+            border: 2px solid #555;
+            padding: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            background: #000;
+            border-color: #fff;
+        }
+
+        .resource-card.visited {
+            background: #2a2a2a;
+            border-color: #fff;
+        }
+
+        .resource-card h3 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .resource-card p {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .resource-card a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            border-bottom: 1px solid #fff;
+        }
+
+        .resource-card a:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .resources {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>日本語 Study Hub</h1>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number" id="visitedToday">0</span>
+                    <span class="label">Visited Today</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" id="totalResources">0</span>
+                    <span class="label">Total Resources</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="category">
+            <h2>Core Study Tools</h2>
+            <div class="resources">
+                <div class="resource-card" data-id="wanikani">
+                    <h3>WaniKani</h3>
+                    <p>Kanji and vocabulary SRS system</p>
+                    <a href="https://www.wanikani.com" target="_blank">wanikani.com →</a>
+                </div>
+                <div class="resource-card" data-id="bunpro">
+                    <h3>Bunpro</h3>
+                    <p>Grammar SRS platform</p>
+                    <a href="https://bunpro.jp" target="_blank">bunpro.jp →</a>
+                </div>
+                <div class="resource-card" data-id="tanoshii">
+                    <h3>Tanoshii Japanese</h3>
+                    <p>Grammar lessons and resources</p>
+                    <a href="https://www.tanoshiijapanese.com" target="_blank">tanoshiijapanese.com →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Reading Practice</h2>
+            <div class="resources">
+                <div class="resource-card" data-id="learnnatively">
+                    <h3>Learn Natively</h3>
+                    <p>Track and discover graded reading materials</p>
+                    <a href="https://learnnatively.com" target="_blank">learnnatively.com →</a>
+                </div>
+                <div class="resource-card" data-id="satori">
+                    <h3>Satori Reader</h3>
+                    <p>Graded reading with audio</p>
+                    <a href="https://www.satorireader.com" target="_blank">satorireader.com →</a>
+                </div>
+                <div class="resource-card" data-id="mokuro">
+                    <h3>Mokuro</h3>
+                    <p>Manga reader with OCR text selection</p>
+                    <a href="https://reader.mokuro.app/#/catalog" target="_blank">reader.mokuro.app →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Grammar & Reference</h2>
+            <div class="resources">
+                <div class="resource-card" data-id="jisho">
+                    <h3>Jisho</h3>
+                    <p>Japanese-English dictionary</p>
+                    <a href="https://jisho.org" target="_blank">jisho.org →</a>
+                </div>
+                <div class="resource-card" data-id="imabi">
+                    <h3>Imabi</h3>
+                    <p>Comprehensive grammar guide</p>
+                    <a href="https://www.imabi.org" target="_blank">imabi.org →</a>
+                </div>
+                <div class="resource-card" data-id="weblio">
+                    <h3>Weblio</h3>
+                    <p>Japanese-Japanese dictionary</p>
+                    <a href="https://www.weblio.jp" target="_blank">weblio.jp →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Listening & Media</h2>
+            <div class="resources">
+                <div class="resource-card" data-id="jpdb">
+                    <h3>jpdb.io</h3>
+                    <p>Anime/drama vocabulary mining</p>
+                    <a href="https://jpdb.io" target="_blank">jpdb.io →</a>
+                </div>
+                <div class="resource-card" data-id="interviewing-japan">
+                    <h3>Interviewing Japan</h3>
+                    <p>Japanese interviews (YouTube)</p>
+                    <a href="https://www.youtube.com/@InterviewingJapan" target="_blank">YouTube →</a>
+                </div>
+                <div class="resource-card" data-id="comprehensible">
+                    <h3>Comprehensible Japanese</h3>
+                    <p>CI video content (YouTube)</p>
+                    <a href="https://www.youtube.com/@ComprehensibleJapanese" target="_blank">YouTube →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Misc</h2>
+            <div class="resources">
+                <div class="resource-card" data-id="mokuro-catalog">
+                    <h3>Mokuro Catalog</h3>
+                    <p>Browse available manga for Mokuro reader</p>
+                    <a href="https://catalog.mokuro.moe/" target="_blank">catalog.mokuro.moe →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Initialize or load saved data
+        let visitedResources = JSON.parse(localStorage.getItem('visitedResources')) || {};
+        let lastResetDate = localStorage.getItem('lastResetDate') || 'Never';
+
+        // Check if we need to reset for a new day
+        const today = new Date().toDateString();
+        if (lastResetDate !== today && lastResetDate !== 'Never') {
+            visitedResources = {};
+            localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
+            localStorage.setItem('lastResetDate', today);
+            lastResetDate = today;
+        }
+
+        // Get all resource cards
+        const cards = document.querySelectorAll('.resource-card');
+        const totalResources = cards.length;
+        document.getElementById('totalResources').textContent = totalResources;
+
+        // Initialize each card
+        cards.forEach(card => {
+            const id = card.dataset.id;
+            
+            // Set initial state
+            if (visitedResources[id]) {
+                card.classList.add('visited');
+            }
+
+            // Handle card clicks
+            card.addEventListener('click', (e) => {
+                // Mark as visited
+                visitedResources[id] = true;
+                card.classList.add('visited');
+                localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
+                updateStats();
+                
+                // Open link
+                const link = card.querySelector('a');
+                if (e.target.tagName !== 'A') {
+                    link.click();
+                }
+            });
+        });
+
+        // Update statistics
+        function updateStats() {
+            const visitedCount = Object.keys(visitedResources).length;
+            document.getElementById('visitedToday').textContent = visitedCount;
+        }
+
+        // Initial stats update
+        updateStats();
+    </script>
+</body>
+</html>
