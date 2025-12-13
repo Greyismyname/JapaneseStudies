@@ -339,11 +339,16 @@
                 localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
                 updateStats();
                 
-                // Open link in new tab and close current window
+                // Open link in new tab
                 const link = card.querySelector('a');
                 const url = link.href;
                 window.open(url, '_blank');
-                window.close();
+                
+                // For web apps: redirect current window to blank page
+                // This effectively "closes" the app without actually closing the window
+                setTimeout(() => {
+                    window.location.href = 'about:blank';
+                }, 100);
                 
                 e.preventDefault();
             });
