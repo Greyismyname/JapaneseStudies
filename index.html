@@ -339,11 +339,13 @@
                 localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
                 updateStats();
                 
-                // Open link
+                // Open link in new tab and close current window
                 const link = card.querySelector('a');
-                if (e.target.tagName !== 'A') {
-                    link.click();
-                }
+                const url = link.href;
+                window.open(url, '_blank');
+                window.close();
+                
+                e.preventDefault();
             });
         });
 
