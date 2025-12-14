@@ -344,26 +344,35 @@
                 const url = link.href;
                 window.open(url, '_blank');
                 
-                // Try multiple methods to close/hide the window for Linux web apps
+                // Mark that we clicked and attempt close
+                localStorage.setItem('shouldClose', 'true');
+                
                 setTimeout(() => {
-                    // Method 1: Try Chrome app API
-                    if (typeof chrome !== 'undefined' && chrome.app && chrome.app.window) {
-                        chrome.app.window.current().close();
-                    }
-                    // Method 2: Try standard window.close()
-                    else if (window.close()) {
-                        window.close();
-                    }
-                    // Method 3: Minimize by going to a minimal page
-                    else {
-                        // Replace entire page with minimal content
-                        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;font-family:monospace;">Press Alt+F4 or close this window</div>';
-                    }
+                    // Try various close methods
+                    window.opener = window;
+                    window.close();
+                    
+                    // If we're still here after 200ms, the close didn't work
+                    setTimeout(() => {
+                        // Hide the window by making it tiny and transparent
+                        document.body.style.opacity = '0';
+                        window.resizeTo(1, 1);
+                        window.moveTo(screen.width, screen.height);
+                    }, 200);
                 }, 100);
                 
                 e.preventDefault();
             });
         });
+        
+        // Check if we should auto-close on load (for app mode)
+        if (localStorage.getItem('shouldClose') === 'true') {
+            localStorage.removeItem('shouldClose');
+            setTimeout(() => {
+                window.opener = window;
+                window.close();
+            }, 100);
+        }
 
         // Update statistics
         function updateStats() {
@@ -373,6 +382,40 @@
 
         // Initial stats update
         updateStats();
+
+        // Keyboard shortcuts
+        const shortcuts = {
+            'w': 'wanikani',
+            'b': 'bunpro',
+            't': 'tanoshii',
+            'l': 'learnnatively',
+            's': 'satori',
+            'm': 'mokuro',
+            'j': 'jisho',
+            'i': 'imabi',
+            'e': 'weblio',
+            'p': 'jpdb',
+            'n': 'interviewing-japan',
+            'c': 'comprehensible',
+            'k': 'mokuro-catalog'
+        };
+
+        document.addEventListener('keydown', (e) => {
+            // Only trigger if not typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            const key = e.key.toLowerCase();
+            const resourceId = shortcuts[key];
+
+            if (resourceId) {
+                const card = document.querySelector(`[data-id="${resourceId}"]`);
+                if (card) {
+                    card.click();
+                }
+            }
+        });
     </script>
 </body>
 </html>
