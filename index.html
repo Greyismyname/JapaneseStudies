@@ -143,11 +143,6 @@
             border-color: #fff;
         }
 
-        .resource-card.visited {
-            background: #2a2a2a;
-            border-color: #fff;
-        }
-
         .resource-card h3 {
             color: #fff;
             margin-bottom: 8px;
@@ -194,16 +189,6 @@
     <div class="container">
         <header>
             <h1>日本語 Study Hub</h1>
-            <div class="stats">
-                <div class="stat-box">
-                    <span class="number" id="visitedToday">0</span>
-                    <span class="label">Visited Today</span>
-                </div>
-                <div class="stat-box">
-                    <span class="number" id="totalResources">0</span>
-                    <span class="label">Total Resources</span>
-                </div>
-            </div>
         </header>
 
         <div class="category">
@@ -282,11 +267,6 @@
                     <p>Natural Japanese conversation podcast</p>
                     <a href="https://www.youtube.com/@teppeisensei" target="_blank">YouTube →</a>
                 </div>
-                <div class="resource-card" data-id="comprehensible">
-                    <h3>Comprehensible Japanese</h3>
-                    <p>CI video content (YouTube)</p>
-                    <a href="https://www.youtube.com/@ComprehensibleJapanese" target="_blank">YouTube →</a>
-                </div>
             </div>
         </div>
 
@@ -315,7 +295,6 @@
                 <div><strong style="color: #fff;">E</strong> - Weblio</div>
                 <div><strong style="color: #fff;">D</strong> - Teppei Sensei</div>
                 <div><strong style="color: #fff;">N</strong> - Interviewing Japan</div>
-                <div><strong style="color: #fff;">C</strong> - Comprehensible Japanese</div>
                 <div><strong style="color: #fff;">K</strong> - Mokuro Catalog</div>
             </div>
         </div>
@@ -323,84 +302,21 @@
     </div>
 
     <script>
-        // Initialize or load saved data
-        let visitedResources = JSON.parse(localStorage.getItem('visitedResources')) || {};
-        let lastResetDate = localStorage.getItem('lastResetDate') || 'Never';
-
-        // Check if we need to reset for a new day
-        const today = new Date().toDateString();
-        if (lastResetDate !== today && lastResetDate !== 'Never') {
-            visitedResources = {};
-            localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
-            localStorage.setItem('lastResetDate', today);
-            lastResetDate = today;
-        }
-
         // Get all resource cards
         const cards = document.querySelectorAll('.resource-card');
-        const totalResources = cards.length;
-        document.getElementById('totalResources').textContent = totalResources;
 
         // Initialize each card
         cards.forEach(card => {
-            const id = card.dataset.id;
-            
-            // Set initial state
-            if (visitedResources[id]) {
-                card.classList.add('visited');
-            }
-
             // Handle card clicks
             card.addEventListener('click', (e) => {
-                // Mark as visited
-                visitedResources[id] = true;
-                card.classList.add('visited');
-                localStorage.setItem('visitedResources', JSON.stringify(visitedResources));
-                updateStats();
-                
                 // Open link in new tab
                 const link = card.querySelector('a');
                 const url = link.href;
                 window.open(url, '_blank');
                 
-                // Mark that we clicked and attempt close
-                localStorage.setItem('shouldClose', 'true');
-                
-                setTimeout(() => {
-                    // Try various close methods
-                    window.opener = window;
-                    window.close();
-                    
-                    // If we're still here after 200ms, the close didn't work
-                    setTimeout(() => {
-                        // Hide the window by making it tiny and transparent
-                        document.body.style.opacity = '0';
-                        window.resizeTo(1, 1);
-                        window.moveTo(screen.width, screen.height);
-                    }, 200);
-                }, 100);
-                
                 e.preventDefault();
             });
         });
-        
-        // Check if we should auto-close on load (for app mode)
-        if (localStorage.getItem('shouldClose') === 'true') {
-            localStorage.removeItem('shouldClose');
-            setTimeout(() => {
-                window.opener = window;
-                window.close();
-            }, 100);
-        }
-
-        // Update statistics
-        function updateStats() {
-            const visitedCount = Object.keys(visitedResources).length;
-            document.getElementById('visitedToday').textContent = visitedCount;
-        }
-
-        // Initial stats update
-        updateStats();
 
         // Keyboard shortcuts
         const shortcuts = {
@@ -415,7 +331,6 @@
             'e': 'weblio',
             'd': 'teppei',
             'n': 'interviewing-japan',
-            'c': 'comprehensible',
             'k': 'mokuro-catalog'
         };
 
