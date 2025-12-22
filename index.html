@@ -314,9 +314,35 @@
                 const url = link.href;
                 window.open(url, '_blank');
                 
+                // Mark that we clicked and attempt close
+                localStorage.setItem('shouldClose', 'true');
+                
+                setTimeout(() => {
+                    // Try various close methods
+                    window.opener = window;
+                    window.close();
+                    
+                    // If we're still here after 200ms, the close didn't work
+                    setTimeout(() => {
+                        // Hide the window by making it tiny and transparent
+                        document.body.style.opacity = '0';
+                        window.resizeTo(1, 1);
+                        window.moveTo(screen.width, screen.height);
+                    }, 200);
+                }, 100);
+                
                 e.preventDefault();
             });
         });
+        
+        // Check if we should auto-close on load (for app mode)
+        if (localStorage.getItem('shouldClose') === 'true') {
+            localStorage.removeItem('shouldClose');
+            setTimeout(() => {
+                window.opener = window;
+                window.close();
+            }, 100);
+        }
 
         // Keyboard shortcuts
         const shortcuts = {
