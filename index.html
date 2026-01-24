@@ -314,9 +314,6 @@
                 const url = link.href;
                 window.open(url, '_blank');
                 
-                // Mark that we clicked and attempt close
-                localStorage.setItem('shouldClose', 'true');
-                
                 setTimeout(() => {
                     // Try various close methods
                     window.opener = window;
@@ -334,15 +331,6 @@
                 e.preventDefault();
             });
         });
-        
-        // Check if we should auto-close on load (for app mode)
-        if (localStorage.getItem('shouldClose') === 'true') {
-            localStorage.removeItem('shouldClose');
-            setTimeout(() => {
-                window.opener = window;
-                window.close();
-            }, 100);
-        }
 
         // Keyboard shortcuts
         const shortcuts = {
