@@ -302,31 +302,72 @@
     </div>
 
     <script>
+        // Load the click sound
+        let clickSound = null;
+        
+        // Fetch and decode the audio file
+        fetch('backspace.wav')
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                return audioContext.decodeAudioData(arrayBuffer);
+            })
+            .then(audioBuffer => {
+                clickSound = audioBuffer;
+            })
+            .catch(error => console.log('Could not load click sound:', error));
+
+        function playClickSound() {
+            if (!clickSound) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const source = audioContext.createBufferSource();
+            source.buffer = clickSound;
+            
+            const gainNode = audioContext.createGain();
+            gainNode.gain.value = 0.5; // Adjust volume here (0.0 to 1.0)
+            
+            source.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            source.start(0);
+        }
+
         // Get all resource cards
         const cards = document.querySelectorAll('.resource-card');
+
+        // Check if launched as web app via URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const isWebApp = urlParams.get('webapp') === 'true';
 
         // Initialize each card
         cards.forEach(card => {
             // Handle card clicks
             card.addEventListener('click', (e) => {
+                // Play click sound
+                playClickSound();
+                
                 // Open link in new tab
                 const link = card.querySelector('a');
                 const url = link.href;
                 window.open(url, '_blank');
                 
-                setTimeout(() => {
-                    // Try various close methods
-                    window.opener = window;
-                    window.close();
-                    
-                    // If we're still here after 200ms, the close didn't work
+                // Only attempt to close/hide if running as a web app
+                if (isWebApp) {
                     setTimeout(() => {
-                        // Hide the window by making it tiny and transparent
-                        document.body.style.opacity = '0';
-                        window.resizeTo(1, 1);
-                        window.moveTo(screen.width, screen.height);
-                    }, 200);
-                }, 100);
+                        // Try various close methods
+                        window.opener = window;
+                        window.close();
+                        
+                        // If we're still here after 200ms, the close didn't work
+                        setTimeout(() => {
+                            // Hide the window by making it tiny and transparent
+                            document.body.style.opacity = '0';
+                            window.resizeTo(1, 1);
+                            window.moveTo(screen.width, screen.height);
+                        }, 200);
+                    }, 100);
+                }
                 
                 e.preventDefault();
             });
