@@ -10,27 +10,27 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+ 
         /* Hide scrollbar for all elements */
         * {
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE and Edge */
         }
-
+ 
         *::-webkit-scrollbar {
             display: none; /* Chrome, Safari, Opera */
         }
-
+ 
         html {
             overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
-
+ 
         html::-webkit-scrollbar {
             display: none;
         }
-
+ 
         body {
             font-family: 'Courier New', monospace;
             background: #000 url('https://i1.wp.com/www.streethunters.net/wp-content/uploads/2017/01/Daido-Moriyama-%E2%80%98Record%E2%80%99-ebook-from-Plexus-1.jpg') center/cover fixed;
@@ -42,11 +42,11 @@
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE and Edge */
         }
-
+ 
         body::-webkit-scrollbar {
             display: none; /* Chrome, Safari, Opera */
         }
-
+ 
         body::before {
             content: '';
             position: fixed;
@@ -57,14 +57,14 @@
             background: rgba(0, 0, 0, 0.75);
             z-index: 0;
         }
-
+ 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
-
+ 
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -73,14 +73,14 @@
             border: 3px solid #fff;
             padding: 30px;
         }
-
+ 
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
-
+ 
         .stats {
             display: flex;
             justify-content: center;
@@ -88,32 +88,32 @@
             margin: 20px 0;
             flex-wrap: wrap;
         }
-
+ 
         .stat-box {
             background: #000;
             border: 2px solid #fff;
             padding: 15px 25px;
         }
-
+ 
         .stat-box .number {
             font-size: 2em;
             font-weight: bold;
             display: block;
         }
-
+ 
         .stat-box .label {
             font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
+ 
         .category {
             background: rgba(0, 0, 0, 0.9);
             border: 3px solid #fff;
             padding: 25px;
             margin-bottom: 25px;
         }
-
+ 
         .category h2 {
             color: #fff;
             margin-bottom: 20px;
@@ -123,13 +123,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
+ 
         .resources {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 15px;
         }
-
+ 
         .resource-card {
             background: #1a1a1a;
             border: 2px solid #555;
@@ -137,12 +137,12 @@
             transition: all 0.2s ease;
             cursor: pointer;
         }
-
+ 
         .resource-card:hover {
             background: #000;
             border-color: #fff;
         }
-
+ 
         .resource-card h3 {
             color: #fff;
             margin-bottom: 8px;
@@ -150,13 +150,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
+ 
         .resource-card p {
             color: #aaa;
             font-size: 0.9em;
             margin-bottom: 10px;
         }
-
+ 
         .resource-card a {
             color: #fff;
             text-decoration: none;
@@ -164,21 +164,21 @@
             display: inline-block;
             border-bottom: 1px solid #fff;
         }
-
+ 
         .resource-card a:hover {
             background: #fff;
             color: #000;
         }
-
+ 
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
             }
-
+ 
             .resources {
                 grid-template-columns: 1fr;
             }
-
+ 
             .stats {
                 gap: 15px;
             }
@@ -190,7 +190,7 @@
         <header>
             <h1>日本語 Study Hub</h1>
         </header>
-
+ 
         <div class="category">
             <h2>Core Study Tools</h2>
             <div class="resources">
@@ -211,7 +211,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <div class="category">
             <h2>Reading Practice</h2>
             <div class="resources">
@@ -232,7 +232,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <div class="category">
             <h2>Grammar & Reference</h2>
             <div class="resources">
@@ -253,7 +253,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <div class="category">
             <h2>Listening & Media</h2>
             <div class="resources">
@@ -269,18 +269,28 @@
                 </div>
             </div>
         </div>
-
+ 
         <div class="category">
             <h2>Misc</h2>
             <div class="resources">
+                <div class="resource-card" data-id="anki-guide">
+                    <h3>Anki Setup Guide</h3>
+                    <p>Spaced repetition flashcard app for efficient memorization</p>
+                    <a href="https://youtu.be/_MWtbI4IwfU" target="_blank">youtube.com →</a>
+                </div>
                 <div class="resource-card" data-id="mokuro-catalog">
                     <h3>Mokuro Catalog</h3>
                     <p>Browse available manga for Mokuro reader</p>
                     <a href="https://mokuro.moe/catalog/" target="_blank">catalog.mokuro.moe →</a>
                 </div>
+                <div class="resource-card" data-id="yomitan">
+                    <h3>Yomitan</h3>
+                    <p>Browser extension for popup dictionary lookups</p>
+                    <a href="https://github.com/themoeway/yomitan" target="_blank">github.com/themoeway/yomitan →</a>
+                </div>
             </div>
         </div>
-
+ 
         <div class="category">
             <h2>Keyboard Shortcuts</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; color: #aaa; font-size: 0.9em;">
@@ -295,12 +305,14 @@
                 <div><strong style="color: #fff;">E</strong> - Weblio</div>
                 <div><strong style="color: #fff;">D</strong> - Teppei Sensei</div>
                 <div><strong style="color: #fff;">N</strong> - Interviewing Japan</div>
+                <div><strong style="color: #fff;">A</strong> - Anki Setup Guide</div>
                 <div><strong style="color: #fff;">K</strong> - Mokuro Catalog</div>
+                <div><strong style="color: #fff;">Y</strong> - Yomitan</div>
             </div>
         </div>
-
+ 
     </div>
-
+ 
     <script>
         // Load the click sound
         let clickSound = null;
@@ -316,7 +328,7 @@
                 clickSound = audioBuffer;
             })
             .catch(error => console.log('Could not load click sound:', error));
-
+ 
         function playClickSound() {
             if (!clickSound) return;
             
@@ -332,10 +344,10 @@
             
             source.start(0);
         }
-
+ 
         // Get all resource cards
         const cards = document.querySelectorAll('.resource-card');
-
+ 
         // Initialize each card
         cards.forEach(card => {
             // Handle card clicks
@@ -366,7 +378,7 @@
                 e.preventDefault();
             });
         });
-
+ 
         // Keyboard shortcuts
         const shortcuts = {
             'w': 'wanikani',
@@ -380,18 +392,20 @@
             'e': 'weblio',
             'd': 'teppei',
             'n': 'interviewing-japan',
-            'k': 'mokuro-catalog'
+            'a': 'anki-guide',
+            'k': 'mokuro-catalog',
+            'y': 'yomitan'
         };
-
+ 
         document.addEventListener('keydown', (e) => {
             // Only trigger if not typing in an input field
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
                 return;
             }
-
+ 
             const key = e.key.toLowerCase();
             const resourceId = shortcuts[key];
-
+ 
             if (resourceId) {
                 const card = document.querySelector(`[data-id="${resourceId}"]`);
                 if (card) {
@@ -402,3 +416,4 @@
     </script>
 </body>
 </html>
+ 
